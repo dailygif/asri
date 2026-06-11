@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Our Special Story - Created for You</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* RESET & ROOT LOCK */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        body, html {
+            background-color: #160211;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* CONTAINER UTAMA GITHUB PAGES SCREEN */
+        .main-romantic-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #2b0822 0%, #160211 100%);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* STRUKTUR HALAMAN DIGITAL */
+        .romance-page-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            visibility: hidden;
+            z-index: 10;
+            opacity: 0;
+            transform: scale(0.97);
+            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+        }
+
+        .romance-page-layer.halaman-aktif {
+            visibility: visible;
+            z-index: 50;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* 💗 HUJAN LOVE SEMI BLUR BACKGROUND (SUPER LAMBAT & ESTETIK) */
+        .love-rain-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden; z-index: 5; pointer-events: none;
+        }
+        .blur-love-item {
+            position: absolute;
+            opacity: 0;
+            bottom: -60px;
+            animation: riseUp 18s linear infinite;
+            filter: blur(1.5px);
+            color: #ff85a1;
+        }
+        @keyframes riseUp {
+            0% { transform: translateY(0) scale(0.7) rotate(0deg); opacity: 0; }
+            15% { opacity: 0.4; }
+            85% { opacity: 0.3; }
+            100% { transform: translateY(-115vh) scale(1.1) rotate(360deg); opacity: 0; }
+        }
+
+        /* TOMBOL NAVIGASI - TIDAK MEPET DAN LONGGAR */
+        .nav-buttons-spacer { 
+            display: flex; 
+            gap: 60px; 
+            margin-top: 55px; 
+            z-index: 100; 
+            width: 100%;
+            justify-content: center;
+        }
+        .btn-romance-nav { 
+            padding: 12px 35px; 
+            font-size: 13px; 
+            font-weight: 500; 
+            background: rgba(255,255,255,0.06); 
+            color: #fff; 
+            border: 1px solid rgba(255,255,255,0.15); 
+            border-radius: 25px; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            letter-spacing: 1px; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-romance-nav:hover { background: #ff85a1; color: #160211; border-color: #ff85a1; }
+
+        /* 1️⃣ HALAMAN 1: COVER INTERACTIVE */
+        .flower-glow-header {
+            position: relative;
+            font-size: 55px;
+            margin-bottom: 60px;
+            z-index: 20;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80px;
+            height: 80px;
+        }
+        
+        .couple-images-row {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            width: 100%;
+            max-width: 380px;
+            z-index: 20;
+            margin-bottom: 50px;
+        }
+
+        /* LAPISAN LAMPU GLOW */
+        .lamp-glow-effect {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(255, 133, 161, 0.45) 0%, transparent 75%);
+            border-radius: 50%;
+            filter: blur(25px);
+            z-index: -1;
+        }
+        .glow-flower-pos { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 160px; height: 160px; }
+
+        /* Frame Foto Berbentuk Elastis */
+        .photo-elastic-item {
+            flex: 1;
+            max-width: 150px;
+            max-height: 200px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 14px;
+            border: 2.5px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+            position: relative;
+        }
+
+        .btn-main-open {
+            padding: 15px 65px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #160211;
+            background: #ff85a1;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 6px 25px rgba(255, 133, 161, 0.4);
+            transition: 0.3s;
+            z-index: 25;
+            letter-spacing: 1px;
+        }
+        .btn-main-open:hover { transform: scale(1.05); background: #ff9ebb; }
+
+        /* 2️⃣ HALAMAN 2: MINIMALIST APPLE MUSIC PLAYER */
+        .apple-music-mini-card { 
+            background: rgba(255, 255, 255, 0.06); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px); 
+            padding: 20px; 
+            border-radius: 24px; 
+            width: 100%; 
+            max-width: 270px; 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.45); 
+            text-align: left;
+        }
+        .apple-cover-art { width: 100%; aspect-ratio: 1; border-radius: 14px; margin-bottom: 15px; overflow: hidden; }
+        .apple-cover-art img { width: 100%; height: 100%; object-fit: cover; }
+        .apple-track-name { font-size: 16px; font-weight: 600; color: #fff; }
+        .apple-track-artist { font-size: 13px; color: #ff85a1; margin-top: 2px; }
+        .apple-progress-timeline { width: 100%; height: 4px; background: rgba(255,255,255,0.12); border-radius: 2px; margin-top: 15px; cursor: pointer; }
+        .apple-progress-bar-fill { width: 0%; height: 100%; background: #fff; border-radius: 2px; }
+        .apple-timestamps { display: flex; justify-content: space-between; font-size: 10px; color: #888; margin-top: 6px; margin-bottom: 15px; }
+        .apple-controls-layout { display: flex; justify-content: space-around; align-items: center; }
+        .apple-icon-btn { background: none; border: none; color: #fff; font-size: 18px; cursor: pointer; }
+        .apple-icon-btn.master-play-pause { font-size: 32px; color: #ff85a1; }
+
+        /* 3️⃣ HALAMAN 3: POPUP MENU UTAMA */
+        .romantic-menu-grid { display: flex; flex-direction: column; gap: 15px; width: 100%; max-width: 280px; z-index: 20; }
+        .romantic-grid-item { width: 100%; padding: 18px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; display: flex; align-items: center; gap: 15px; cursor: pointer; font-size: 14px; color: #fff; transition: 0.3s; }
+        .romantic-grid-item:hover { background: rgba(255, 133, 161, 0.08); border-color: #ff85a1; }
+        .romantic-grid-item i { font-size: 20px; color: #ff85a1; }
+
+        /* 🌐 OVERLAY LAYERS */
+        .modal-popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.93); z-index: 99999; display: none; flex-direction: column; justify-content: center; align-items: center; padding: 20px; }
+        
+        /* Kertas Surat Terfokus di Tengah Rapi & Anti Meluber */
+        .romantic-letter-paper { 
+            background: #faf3e0; 
+            color: #3d2a16; 
+            padding: 35px 25px; 
+            border-radius: 16px; 
+            width: 100%; 
+            max-width: 320px; 
+            max-height: 55vh; 
+            border-left: 6px solid #dcd1b4; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5); 
+            overflow-y: auto; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center;        
+            text-align: center;      
+        }
+        .romantic-letter-paper h2 { font-family: 'Great Vibes', cursive; font-size: 32px; margin-bottom: 15px; color: #52391e; }
+        .romantic-letter-paper p { font-size: 13.5px; line-height: 1.6; color: #3d2a16; word-wrap: break-word; font-weight: 400; }
+        
+        /* Galeri Frame */
+        .gallery-box-popup { width: 100%; max-width: 320px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .gallery-elastic-frame { max-width: 100%; max-height: 50vh; width: auto; height: auto; object-fit: contain; border-radius: 12px; }
+        
+        /* ✉️ KOTAK PESAN KOLOM CHAT REAL INTERAKTIF */
+        .unlocked-chat-container { 
+            width: 100%; 
+            max-width: 330px; 
+            background: #0b141a; 
+            border: 1px solid rgba(255,133,161,0.2); 
+            border-radius: 24px; 
+            display: flex; 
+            flex-direction: column; 
+            height: 55vh; 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            overflow: hidden;
+        }
+        .chat-messages-log { 
+            flex: 1; 
+            padding: 15px; 
+            overflow-y: auto; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 10px; 
+            background: #0b141a;
+        }
+        .chat-bubble-row { 
+            position: relative;
+            max-width: 85%; 
+            padding: 8px 14px 18px 14px; 
+            font-size: 13.5px; 
+            line-height: 1.4; 
+            border-radius: 14px; 
+            color: #fff; 
+            word-wrap: break-word; 
+            animation: popBubble 0.25s ease-out forwards; 
+            display: flex;
+            flex-direction: column;
+        }
+        @keyframes popBubble { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .bubble-me { background: #005c4b; color: #e9edef; align-self: flex-end; border-bottom-right-radius: 2px; }
+        
+        /* Tambahan style khusus untuk balon balasan pasangan (warna abu-abu gelap khas WhatsApp) */
+        .bubble-partner { background: #202c33; color: #e9edef; align-self: flex-start; border-bottom-left-radius: 2px; }
+        
+        .chat-timestamp { position: absolute; bottom: 3px; right: 10px; font-size: 9px; color: rgba(255,255,255,0.5); }
+        
+        /* Form Kolom Input Chat Real */
+        .chat-input-area { 
+            display: flex; 
+            padding: 10px; 
+            background: #202c33; 
+            gap: 8px;
+            align-items: center;
+        }
+        .input-message-box { 
+            flex: 1; 
+            padding: 10px 14px; 
+            background: #2a3942; 
+            border: none;
+            border-radius: 20px; 
+            color: #fff; 
+            font-size: 13.5px; 
+            outline: none; 
+            -webkit-user-select: text !important;
+            user-select: text !important;
+        }
+        .input-message-box::placeholder { color: #8696a0; }
+        .btn-send-chat { 
+            background: #00a884; 
+            border: none; 
+            width: 38px; 
+            height: 38px; 
+            border-radius: 50%; 
+            color: #fff; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 14px;
+            transition: 0.2s;
+        }
+        .btn-send-chat:hover { transform: scale(1.05); }
+
+        .btn-close-popup { margin-top: 20px; padding: 10px 30px; background: #ff85a1; color: #fff; border: none; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 12px; }
+    </style>
+</head>
+<body>
+
+<div class="main-romantic-wrapper">
+    <div class="love-rain-container" id="loveRainEngine"></div>
+    <audio id="musicTrackEngine" src="" loop></audio>
+
+    <div id="page-romance-1" class="romance-page-layer halaman-aktif">
+        <div class="flower-glow-header">
+            <div class="lamp-glow-effect glow-flower-pos"></div>
+            🌸
+        </div>
+        
+        <div class="couple-images-row">
+            <div class="photo-elastic-item">
+                <div class="lamp-glow-effect" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+                <img id="linkFotoHalaman1Boy" src="" alt="Foto Cowok" style="width:100%; height:100%; object-fit:cover; border-radius:12px;">
+            </div>
+            
+            <div class="photo-elastic-item">
+                <div class="lamp-glow-effect" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+                <img id="linkFotoHalaman1Girl" src="" alt="Foto Cewek" style="width:100%; height:100%; object-fit:cover; border-radius:12px;">
+            </div>
+        </div>
+        
+        <button class="btn-main-open" onclick="navigasiKeHalaman(2)">Open</button>
+    </div>
+
+    <div id="page-romance-2" class="romance-page-layer">
+        <div class="apple-music-mini-card">
+            <div class="apple-cover-art">
+                <img id="linkFotoAppleMusic" src="" alt="Cover Musik Apple">
+            </div>
+            <div>
+                <div class="apple-track-name">Kisah Sempurna</div>
+                <div class="apple-track-artist">Spesial Untukmu</div>
+            </div>
+            <div class="apple-progress-timeline" onclick="aturGarisWaktuLagu(event)">
+                <div class="apple-progress-bar-fill" id="progressBarStatus"></div>
+            </div>
+            <div class="apple-timestamps">
+                <span id="timeCurrent">0:00</span>
+                <span id="timeTotal">0:00</span>
+            </div>
+            <div class="apple-controls-layout">
+                <button class="apple-icon-btn" onclick="toggleMuteAudioTrack()" id="btnTrackMute"><i class="fa-solid fa-volume-high"></i></button>
+                <button class="apple-icon-btn master-play-pause" onclick="togglePlayAudioTrack()" id="btnTrackPlay"><i class="fa-solid fa-circle-pause"></i></button>
+                <button class="apple-icon-btn" style="opacity: 0.2; cursor: default;"><i class="fa-solid fa-forward-step"></i></button>
+            </div>
+        </div>
+        <div class="nav-buttons-spacer">
+            <button class="btn-romance-nav" onclick="navigasiKeHalaman(1)"><i class="fa-solid fa-chevron-left"></i> Back</button>
+            <button class="btn-romance-nav" onclick="navigasiKeHalaman(3)">Next <i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <div id="page-romance-3" class="romance-page-layer">
+        <div class="romantic-menu-grid">
+            <div class="romantic-grid-item" onclick="pemicuPopup('popupLetterArea', true)">
+                <i class="fa-solid fa-envelope-open-text"></i>
+                <span>Surat Untukmu</span>
+            </div>
+            <div class="romantic-grid-item" onclick="pemicuPopup('popupGalleryArea', true)">
+                <i class="fa-solid fa-images"></i>
+                <span>Galeri Foto Kita</span>
+            </div>
+            <div class="romantic-grid-item" onclick="pemicuPopup('popupChatArea', true)">
+                <i class="fa-solid fa-comments"></i>
+                <span>Pesan Teks Kita</span>
+            </div>
+        </div>
+        <div class="nav-buttons-spacer">
+            <button class="btn-romance-nav" onclick="navigasiKeHalaman(2)"><i class="fa-solid fa-chevron-left"></i> Back</button>
+            <button class="btn-romance-nav" onclick="navigasiKeHalaman(4)">Next <i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <div id="page-romance-4" class="romance-page-layer">
+        <div style="text-align: center; max-width: 280px;">
+            <h1 style="font-family: 'Great Vibes', cursive; font-size: 42px; color: #ff85a1; margin-bottom: 12px;">Terima Kasih... ✨</h1>
+            <p style="font-size: 13.5px; line-height: 1.6; color: #dfdfdf; font-weight: 300;">Setiap detik bersamamu adalah momen terbaik dalam hidupku. Bahagia selalu ya kita!</p>
+        </div>
+        <div class="nav-buttons-spacer">
+            <button class="btn-romance-nav" onclick="navigasiKeHalaman(3)"><i class="fa-solid fa-chevron-left"></i> Back</button>
+            <button class="btn-romance-nav" onclick="navigasiKeHalaman(1)"><i class="fa-solid fa-rotate-left"></i> Awal</button>
+        </div>
+    </div>
+</div>
+
+<div id="popupLetterArea" class="modal-popup-overlay">
+    <div class="romantic-letter-paper">
+        <h2>Hai Kamu...</h2>
+        <p>Lewat tulisan kecil ini, aku hanya ingin menyampaikan rasa syukur yang amat besar karena kamu telah hadir di hidupku. Terima kasih telah menjadi orang yang penuh kesabaran, pendengar yang baik, serta sumber tawa paling tulus di setiap hariku.</p>
+    </div>
+    <button class="btn-close-popup" onclick="pemicuPopup('popupLetterArea', false)">Tutup Surat</button>
+</div>
+
+<div id="popupGalleryArea" class="modal-popup-overlay">
+    <div class="gallery-box-popup">
+        <img id="imageContainerFrame" src="" alt="Koleksi Kenangan" class="gallery-elastic-frame">
+        <div class="nav-buttons-spacer" style="margin-top: 10px; gap: 30px;">
+            <button class="btn-romance-nav" style="padding: 8px 22px;" onclick="geserFotoSlide(-1)"><i class="fa-solid fa-arrow-left"></i> Prev</button>
+            <button class="btn-romance-nav" style="padding: 8px 22px;" onclick="geserFotoSlide(1)">Next <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </div>
+    <button class="btn-close-popup" onclick="pemicuPopup('popupGalleryArea', false)">Tutup Galeri</button>
+</div>
+
+<div id="popupChatArea" class="modal-popup-overlay">
+    <div class="unlocked-chat-container">
+        <div class="chat-messages-log" id="chatMessagesLog"></div>
+        
+        <div class="chat-input-area">
+            <input type="text" id="chatInputField" class="input-message-box" placeholder="Ketik pesan..." onkeypress="handleChatKeyPress(event)">
+            <button class="btn-send-chat" onclick="kirimPesanChatBeli()"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+    </div>
+    <button class="btn-close-popup" onclick="pemicuPopup('popupChatArea', false)">Tutup Obrolan</button>
+</div>
+
+<script>
+    // ==========================================================================
+    // SEKSI KONFIGURASI LINK (SEMUA LINK TARUH DI SINI AGAR KAMU TIDAK PUSING)
+    // ==========================================================================
+    
+    // 1. Link Musik Utama (.mp3)
+    var LINK_MUSIK_UTAMA = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
+    
+    // 2. Link Foto Halaman 1 (Foto Cowok & Cewek Berdampingan)
+    var FOTO_HAL_1_COWOK = "https://picsum.photos/300/400?random=11";
+    var FOTO_HAL_1_CEWEK = "https://picsum.photos/300/400?random=12";
+    
+    // 3. Link Foto Cover Apple Music Halaman 2
+    var FOTO_COVER_APPLE_MUSIC = "https://picsum.photos/300/300?random=55";
+    
+    // 4. Daftar Link Foto untuk Galeri Slide Pop-up Halaman 3
+    var koleksiFotoUrl = [
+        "https://picsum.photos/400/600?random=88",
+        "https://picsum.photos/600/400?random=89",
+        "https://picsum.photos/400/600?random=90"
+    ];
+
+    // 5. Variasi Teks Balasan Otomatis dari Pasangan (Bisa kamu ganti atau tambah sesuka hati)
+    var daftarBalasanPasangan = [
+        "Iya sayang, kenapa? 🥰",
+        "I love you moreee! ❤️",
+        "Kangen ih, kapan ketemu? 🥺",
+        "Gemes banget sih kamu hari ini hahahaha",
+        "Makasih ya udah selalu ada buat aku ✨",
+        "Lagi apa kamu? Jangan lupa makan yaa!"
+    ];
+
+    // ==========================================================================
+    // ENGINE UTAMA JAVASCRIPT (PROSES OTOMATISASI LINK & LOGIC)
+    // ==========================================================================
+    document.getElementById('musicTrackEngine').src = LINK_MUSIK_UTAMA;
+    document.getElementById('linkFotoHalaman1Boy').src = FOTO_HAL_1_COWOK;
+    document.getElementById('linkFotoHalaman1Girl').src = FOTO_HAL_1_CEWEK;
+    document.getElementById('linkFotoAppleMusic').src = FOTO_COVER_APPLE_MUSIC;
+    document.getElementById('imageContainerFrame').src = koleksiFotoUrl[0];
+
+    var audioEngine = document.getElementById('musicTrackEngine');
+    var trackPlayBtn = document.getElementById('btnTrackPlay');
+    var trackMuteBtn = document.getElementById('btnTrackMute');
+    var statusFillBar = document.getElementById('progressBarStatus');
+    var txtCurrentTime = document.getElementById('timeCurrent');
+    var txtTotalTime = document.getElementById('timeTotal');
+
+    function navigasiKeHalaman(indexHalaman) {
+        document.querySelectorAll('.romance-page-layer').forEach(function(slide) {
+            slide.style.setProperty('visibility', 'hidden', 'important');
+            slide.style.setProperty('z-index', '-10', 'important');
+            slide.style.setProperty('opacity', '0', 'important');
+            slide.classList.remove('halaman-aktif');
+        });
+        
+        var targetSlide = document.getElementById('page-romance-' + indexHalaman);
+        if(targetSlide) {
+            targetSlide.style.setProperty('visibility', 'visible', 'important');
+            targetSlide.style.setProperty('z-index', '50', 'important');
+            setTimeout(function(){
+                targetSlide.style.setProperty('opacity', '1', 'important');
+                targetSlide.classList.add('halaman-aktif');
+            }, 30);
+        }
+
+        if (indexHalaman === 2 && audioEngine.paused) {
+            audioEngine.play().catch(function() { console.log("Audio started safely."); });
+            trackPlayBtn.innerHTML = '<i class="fa-solid fa-circle-pause"></i>';
+        }
+    }
+
+    // Generator Hujan Love 💗 Semi Blur (Maksimal Pelan & Tenang)
+    function generateLoveRain() {
+        var field = document.getElementById('loveRainEngine');
+        if (!field || field.childElementCount > 5) return;
+
+        var loveNode = document.createElement('div');
+        loveNode.classList.add('blur-love-item');
+        loveNode.innerHTML = '💗';
+        loveNode.style.left = (Math.random() * 92) + 'vw';
+        loveNode.style.animationDuration = (Math.random() * 4 + 16) + 's';
+        loveNode.style.fontSize = (Math.random() * 5 + 16) + 'px';
+        
+        field.appendChild(loveNode);
+        setTimeout(function() { loveNode.remove(); }, 17500);
+    }
+    setInterval(generateLoveRain, 2500);
+
+    // Fitur Mengirim Pesan Chat Interaktif + Auto Balas dari Pasangan
+    function kirimPesanChatBeli() {
+        var inputField = document.getElementById('chatInputField');
+        var logWadah = document.getElementById('chatMessagesLog');
+        var teks = inputField.value.trim();
+        
+        if(teks === "") return;
+
+        // 1. Munculkan pesan dari kita
+        var bubbleMe = document.createElement('div');
+        bubbleMe.className = 'chat-bubble-row bubble-me';
+        
+        var d = new Date();
+        var jamMenit = d.getHours().toString().padStart(2, '0') + ':' + d.getMinutes().toString().padStart(2, '0');
+        
+        bubbleMe.innerHTML = teks + '<span class="chat-timestamp">' + jamMenit + '</span>';
+        logWadah.appendChild(bubbleMe);
+        
+        inputField.value = "";
+        logWadah.scrollTop = logWadah.scrollHeight;
+
+        // 2. Simulasi balasan dari pasangan setelah jeda 1.5 detik
+        setTimeout(function() {
+            var bubblePartner = document.createElement('div');
+            bubblePartner.className = 'chat-bubble-row bubble-partner';
+            
+            // Mengambil teks balasan secara acak dari daftar configurasi nomor 5 di atas
+            var indeksAcak = Math.floor(Math.random() * daftarBalasanPasangan.length);
+            var teksBalasan = daftarBalasanPasangan[indeksAcak];
+            
+            var d2 = new Date();
+            var jamMenit2 = d2.getHours().toString().padStart(2, '0') + ':' + d2.getMinutes().toString().padStart(2, '0');
+            
+            bubblePartner.innerHTML = teksBalasan + '<span class="chat-timestamp">' + jamMenit2 + '</span>';
+            logWadah.appendChild(bubblePartner);
+            
+            // Auto scroll otomatis ke bagian paling bawah setelah ada balasan masuk
+            logWadah.scrollTop = logWadah.scrollHeight;
+        }, 1500);
+    }
+
+    function handleChatKeyPress(event) {
+        if (event.key === "Enter") {
+            kirimPesanChatBeli();
+        }
+    }
+
+    function togglePlayAudioTrack() {
+        if (audioEngine.paused) { 
+            audioEngine.play(); 
+            trackPlayBtn.innerHTML = '<i class="fa-solid fa-circle-pause"></i>'; 
+        } else { 
+            audioEngine.pause(); 
+            trackPlayBtn.innerHTML = '<i class="fa-solid fa-circle-play"></i>'; 
+        }
+    }
+
+    function toggleMuteAudioTrack() {
+        audioEngine.muted = !audioEngine.muted;
+        trackMuteBtn.innerHTML = audioEngine.muted ? '<i class="fa-solid fa-volume-xmark"></i>' : '<i class="fa-solid fa-volume-high"></i>';
+    }
+
+    if(audioEngine) {
+        audioEngine.addEventListener('timeupdate', function() {
+            var current = audioEngine.currentTime;
+            var duration = audioEngine.duration || 0;
+            var progressPercentage = (current / duration) * 100;
+            if(statusFillBar) statusFillBar.style.width = progressPercentage + '%';
+            
+            var timeFormat = function(secs) {
+                var m = Math.floor(secs / 60);
+                var s = Math.floor(secs % 60).toString().padStart(2, '0');
+                return m + ':' + s;
+            };
+            if(txtCurrentTime) txtCurrentTime.innerHTML = timeFormat(current);
+            if(txtTotalTime) txtTotalTime.innerHTML = timeFormat(duration);
+        });
+    }
+
+    function aturGarisWaktuLagu(e) {
+        var bounds = e.currentTarget.getBoundingClientRect();
+        var clickX = e.clientX - bounds.left;
+        audioEngine.currentTime = (clickX / bounds.width) * audioEngine.duration;
+    }
+
+    function pemicuPopup(targetId, isOpen) {
+        document.getElementById(targetId).style.display = isOpen ? 'flex' : 'none';
+    }
+
+    var indexFoto = 0;
+    function geserFotoSlide(step) {
+        indexFoto = (indexFoto + step + koleksiFotoUrl.length) % koleksiFotoUrl.length;
+        document.getElementById('imageContainerFrame').src = koleksiFotoUrl[indexFoto];
+    }
+</script>
+
+</body>
+</html>
